@@ -6,6 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/graTekst"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gra w Oczko"
+        android:textSize="30sp"
+        android:gravity="center"/>
 
+    <ImageView
+        android:id="@+id/losowaKarta"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_below="@id/graTekst"/>
+
+    <ImageSwitcher
+        android:id="@+id/mojeKarty"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_above="@id/nastepnaKrata"
+        />
+
+    <Button
+        android:id="@+id/koniecGry"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="koniec gry"/>
+
+    <Button
+        android:id="@+id/nastepnaKrata"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Dobierz karte"/>
 
 </RelativeLayout>
