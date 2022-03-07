@@ -5,14 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button nastepnaKarta, koniecGry;
+    private ImageView losowaKarta;
 
-    private ArrayList<Integer> obrazy, mojeKarty;
 
 
     @Override
@@ -20,15 +22,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        obrazy = new int[]{R.drawable.karty_karo, R.drawable.karty_kier};
+        int[] cardsId ={R.drawable.karty_karo, R.drawable.karty_kier, R.drawable.karty_pik, R.drawable.karty_trefl};
+        Random random= new Random();
 
         nastepnaKarta = findViewById(R.id.nastepnaKrata);
         koniecGry = findViewById(R.id.koniecGry);
+        losowaKarta = findViewById(R.id.losowaKarta);
 
         nastepnaKarta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int losowa = random.nextInt(cardsId.length-1);
+                losowaKarta.setImageResource(cardsId[losowa]);
             }
         });
 
