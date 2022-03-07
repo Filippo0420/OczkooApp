@@ -20,6 +20,13 @@
         android:layout_height="500dp"
         android:layout_below="@id/graTekst"/>
 
+    <TextView
+        android:id="@+id/dane"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/losowaKarta"
+        android:text=""/>
+
     <ImageSwitcher
         android:id="@+id/mojeKarty"
         android:layout_width="match_parent"
