@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView dane;
 
     private int[][] naRodzaje = {
-
             {
                 R.drawable.karo2,
                     R.drawable.kier2,
@@ -139,17 +138,14 @@ public class MainActivity extends AppCompatActivity {
         koniecGry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int losowa = -1;
-                int iloscZuzytych = 0;
-                int numer, rodzaj;
+                int numer = 0, rodzaj = 0;
                 do{
-                    numer = random.nextInt(14);
-                    rodzaj = random.nextInt(5);
+                    numer = random.nextInt(5);
+                    rodzaj = random.nextInt(13);
                 }while(listaKart[numer][rodzaj] < 0);
-                losowaKarta.setImageResource(listaKart[numer][rodzaj]);
-                iloscZuzytych++;
-                punktyGracza += punkty[numer];
-                dane.setText(punktyGracza);
+                losowaKarta.setImageResource(naRodzaje[rodzaj][numer]);
+                //punktyGracza += punkty[numer];
+                //dane.setText(punktyGracza);
             }
         });
 
