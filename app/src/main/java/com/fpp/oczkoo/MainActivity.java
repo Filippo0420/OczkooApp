@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    ArrayList<Pair<Integer, Integer>> wylosowane;
     int[] mojeKarty = new int[10];
     int punkty = 0;
     int ileKart = 0;
@@ -77,11 +76,10 @@ public class MainActivity extends AppCompatActivity {
         do{
             numer = random1.nextInt(13);
             rodzaj = random2.nextInt(4);
-        }while (wylosowane.contains(Pair.create(numer, rodzaj)));
-        wylosowane.add(Pair.create(numer, rodzaj));
+        }while (listaKart[numer][rodzaj] == 0);
 
         losowaKarta.setImageResource(listaKart[numer][rodzaj]);
-
+        listaKart[numer][rodzaj] = 0;
         mojeKarty[ileKart] = punktyLista[numer];
 
         punkty += punktyLista[numer];
