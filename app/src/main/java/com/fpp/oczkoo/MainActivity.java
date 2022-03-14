@@ -107,11 +107,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void nowaGra(){
+    public void nowaGra(View view){
         listaKart = wszystkieKarty.getKartyRodzaje();
         mojeKarty = new int[10];
         punkty = 0;
         dane.setText("");
+        ileKart = 0;
+        losowaKarta.setImageResource(R.drawable.joker1);
+        nastepnaKarta.setEnabled(true);
 
     }
 
