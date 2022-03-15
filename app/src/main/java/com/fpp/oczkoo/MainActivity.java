@@ -1,5 +1,7 @@
 package com.fpp.oczkoo;
 
+import static java.lang.Math.abs;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -33,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
             2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 11
     };
 
-
-    int[] mojeKarty = new int[10];
-    int punkty = 0;
+    int[] wykorzystaneKarty = new int[20];
+    int punktyGracz = 0;
+    int punktyKrupier = 0;
     int ileKart = 0;
 
 
@@ -62,8 +64,13 @@ public class MainActivity extends AppCompatActivity {
         koniecGry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dane.setText("Twoje punkty: " + punkty);
-                nastepnaKarta.setEnabled(false);
+                if(abs(punktyGracz - 21) < abs(punktyKrupier - 21)){
+                    dane.setText("Wygrana punkty: " + punktyGracz + "\nPunkty krupiera: " + punktyKrupier);
+                    nastepnaKarta.setEnabled(false);
+                }else{
+                    dane.setText("Przegrana punkty: " + punktyGracz + "\nPunkty krupiera: " + punktyKrupier);
+                    nastepnaKarta.setEnabled(false);
+                }
             }
         });
 
@@ -71,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void losujKarte(){
+        // losowanie dla gracza
         int numer, rodzaj;
 
         do{
@@ -80,28 +88,52 @@ public class MainActivity extends AppCompatActivity {
 
         losowaKarta.setImageResource(listaKart[numer][rodzaj]);
         listaKart[numer][rodzaj] = 0;
-        mojeKarty[ileKart] = punktyLista[numer];
+        wykorzystaneKarty[ileKart] = punktyLista[numer];
 
-        punkty += punktyLista[numer];
-        dane.setText(punkty+"");
+        punktyGracz += punktyLista[numer];
+        dane.setText(punktyGracz+"");
         ileKart++;
-        if(punkty < 21){
 
-            dane.setText(punkty + "");
-        }else if(punkty == 21){
-            dane.setText("WYGRANA" + " twoje punkty: " + punkty);
-            nastepnaKarta.setEnabled(false);
-        }else if(punkty > 21){
-            if(punkty == 22){
-                if(mojeKarty.length == 2){
+        // losowanie dla krupiera
+        if(punktyKrupier < 17){
+            do{
+                numer = random1.nextInt(13);
+                rodzaj = random2.nextInt(4);
+            }while (listaKart[numer][rodzaj] == 0);
+            punktyKrupier += punktyLista[numer];
+            listaKart[numer][rodzaj] = 0;
+        }
+
+
+        // --- --- ---
+
+        if(punktyGracz < 21){
+
+            dane.setText("gracz: " + punktyGracz + "\n" + "krupier: ???");
+        }else if(punktyGracz == 21){
+            if(abs(punktyGracz - 21) < abs(punktyKrupier - 21)){
+                dane.setText("Wygrana punkty: " + punktyGracz + "\nPunkty krupiera: " + punktyKrupier);
+                nastepnaKarta.setEnabled(false);
+            }
+        }else if(punktyGracz > 21){
+            if(punktyGracz == 22){
+                if(wykorzystaneKarty.length == 2){
                     dane.setText("WYGRANA" + " Pawie oczko");
+                }else if(abs(punktyGracz - 21) < abs(punktyKrupier - 21)){
+                    dane.setText("Wygrana punkty: " + punktyGracz + "\nPunkty krupiera: " + punktyKrupier);
+                    nastepnaKarta.setEnabled(false);
                 }else{
-                    dane.setText("PRZEGRANA   " + punkty);
+                    dane.setText("Przegrana punkty: " + punktyGracz + "\nPunkty krupiera: " + punktyKrupier);
                     nastepnaKarta.setEnabled(false);
                 }
             }else{
-                dane.setText("PRZEGRANA   " + punkty);
-                nastepnaKarta.setEnabled(false);
+                if(abs(punktyGracz - 21) < abs(punktyKrupier - 21)){
+                    dane.setText("Wygrana punkty: " + punktyGracz + "\nPunkty krupiera: " + punktyKrupier);
+                    nastepnaKarta.setEnabled(false);
+                }else{
+                    dane.setText("Przegrana punkty: " + punktyGracz + "\nPunkty krupiera: " + punktyKrupier);
+                    nastepnaKarta.setEnabled(false);
+                }
             }
         }
 
@@ -109,8 +141,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void nowaGra(View view){
         listaKart = wszystkieKarty.getKartyRodzaje();
-        mojeKarty = new int[10];
-        punkty = 0;
+        wykorzystaneKarty = new int[10];
+        punktyGracz = 0;
+        punktyKrupier = 0;
         dane.setText("");
         ileKart = 0;
         losowaKarta.setImageResource(R.drawable.joker1);
