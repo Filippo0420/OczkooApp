@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void nowaGra(View view){
         listaKart = wszystkieKarty.getKartyRodzaje();
-        wykorzystaneKarty = new int[10];
+        wykorzystaneKarty = new int[1];
         punktyGracz = 0;
         punktyKrupier = 0;
         dane.setText("");
